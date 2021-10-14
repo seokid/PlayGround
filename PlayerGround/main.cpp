@@ -22,7 +22,12 @@ int main()
 
 void test()
 {
-	cout << CHackerRank::reverseShuffleMerge("abcdefgabcdefg") << endl;
+	vector<vector<int>> vec = {{2, 3},
+		{- 1, - 1},
+		{- 1, - 1},};
+	vector<int> query = {1, 1};
+	
+	CHackerRank::swapNodes(vec, query);
 }
 
 void test2()

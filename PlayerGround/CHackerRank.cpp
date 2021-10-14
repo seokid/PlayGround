@@ -1,6 +1,7 @@
 #include "CHackerRank.h"
 #include <algorithm>
 #include <stack>
+#include <queue>
 #include <map>
 #include <unordered_map>
 #include <iostream>
@@ -97,4 +98,94 @@ void CHackerRank::whatFlavors(vector<int> cost, int money)
 			return;
 		}
 	}
+}
+
+
+//Swap Nodes [Algo]
+//이진 트리 스왑 후 중위 순회 출력
+//깊이가 스왑 값으로 나누어 떨어지는 경우 스왑
+struct tSwapNode
+{
+	int     Value;
+	tSwapNode*  Left;
+	tSwapNode*  Right;
+};
+
+void swapNode_DFS(tSwapNode* Parent, vector<int>& Result)
+{
+	if (-1 == Parent->Value)
+		return;
+
+	swapNode_DFS(Parent->Left, Result);
+	Result.push_back(Parent->Value);
+	swapNode_DFS(Parent->Right, Result);
+}
+
+void swapNode_Swap(tSwapNode* Parent, int Swap, int Depth)
+{
+	if (-1 == Parent->Value)
+		return;
+
+	if (0 == Depth % Swap)
+	{
+		tSwapNode* Tmp = Parent->Left;
+		Parent->Left = Parent->Right;
+		Parent->Right = Tmp;
+	}
+
+	swapNode_Swap(Parent->Left, Swap, Depth + 1);
+	swapNode_Swap(Parent->Right, Swap, Depth + 1);
+}
+
+vector<vector<int>> CHackerRank::swapNodes(vector<vector<int>> indexes, vector<int> queries) {
+	vector<vector<int>> Answer;
+	int Idx = 0;
+	queue<tSwapNode*> que;
+	tSwapNode* RootNode = new tSwapNode{ 1, nullptr, nullptr };
+	que.push(RootNode);
+
+	while (Idx < indexes.size())
+	{
+		tSwapNode* ParentNode = que.front();
+		que.pop();
+
+		if (-1 == ParentNode->Value)
+			continue;
+
+		ParentNode->Left = new tSwapNode{ indexes[Idx][0], nullptr, nullptr };
+		ParentNode->Right = new tSwapNode{ indexes[Idx][1], nullptr, nullptr };
+		++Idx;
+
+		que.push(ParentNode->Left);
+		que.push(ParentNode->Right);
+	}
+
+	for (size_t i = 0; i < queries.size(); ++i)
+	{
+		swapNode_Swap(RootNode, queries[i], 1);
+
+		vector<int> Result;
+		swapNode_DFS(RootNode, Result);
+		Answer.push_back(Result);
+	}
+
+
+	//메모리 해제
+	que = queue<tSwapNode*>();
+	que.push(RootNode);
+	while (!que.empty())
+	{
+		tSwapNode* ParentNode = que.front();
+		que.pop();
+
+		if (-1 == ParentNode->Value)
+			continue;
+
+		que.push(ParentNode->Left);
+		que.push(ParentNode->Right);
+
+		delete ParentNode;
+	}
+
+	return Answer;
 }
