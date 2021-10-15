@@ -152,11 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CHackerRank.cpp" />
+    <ClCompile Include="CProgrammers.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CHackerRank.h" />
+    <ClInclude Include="CProgrammers.h" />
     <ClInclude Include="func.h" />
+    <ClInclude Include="global.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,12 +24,21 @@
     <ClCompile Include="CHackerRank.cpp">
       <Filter>CodingTest</Filter>
     </ClCompile>
+    <ClCompile Include="CProgrammers.cpp">
+      <Filter>CodingTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CHackerRank.h">
       <Filter>CodingTest</Filter>
     </ClInclude>
     <ClInclude Include="func.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CProgrammers.h">
+      <Filter>CodingTest</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

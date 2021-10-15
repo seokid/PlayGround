@@ -1,9 +1,6 @@
 #pragma once
 
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "global.h"
 
 class CHackerRank
 {

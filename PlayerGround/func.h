@@ -1,9 +1,6 @@
 #pragma once
 
-#include <chrono>
-#include <iostream>
-
-using namespace std;
+#include "global.h"
 
 void timeCheck(void(*func)())
 {

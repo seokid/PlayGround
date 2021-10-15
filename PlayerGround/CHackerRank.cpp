@@ -1,10 +1,5 @@
 #include "CHackerRank.h"
-#include <algorithm>
-#include <stack>
-#include <queue>
-#include <map>
-#include <unordered_map>
-#include <iostream>
+
 
 //Reverse Shuffle Merge
 //다음과 같은 규칙으로 합쳐진 문자열의 원본 문자열을 반환해라
