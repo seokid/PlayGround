@@ -1,5 +1,50 @@
 #include "CProgrammers.h"
 
+#define INF 1e8
+
+//2021 KAKAO BLIND RECRUITMENT 합승 택시 요금
+//두 사람이 모두 귀가하는 데 소요되는 예상 최저 택시요금 반환, 합승 가능
+//Floyd Warshall 알고리즘을 사용하여 모든 노드의 최단거리를 구하여 최소요금 계산
+int carPool(int n, int s, int a, int b, vector<vector<int>> fares) {
+	int answer = INF;
+	int NodeSize = n + 1;
+
+	vector<vector<int>> vecDist(NodeSize);
+	for (int i = 1; i < NodeSize; ++i)
+	{
+		vecDist[i].resize(NodeSize);
+		fill(vecDist[i].begin(), vecDist[i].end(), INF);
+	}
+
+	for (int i = 1; i < NodeSize; ++i)
+		vecDist[i][i] = 0;
+
+	for (size_t i = 0; i < fares.size(); ++i)
+	{
+		vecDist[fares[i][0]][fares[i][1]] = fares[i][2];
+		vecDist[fares[i][1]][fares[i][0]] = fares[i][2];
+	}
+
+	for (int i = 1; i < NodeSize; ++i)
+	{
+		for (int j = 1; j < NodeSize; ++j)
+		{
+			for (int k = 1; k < NodeSize; ++k)
+			{
+				vecDist[j][k] = min(vecDist[j][k], vecDist[j][i] + vecDist[i][k]);
+
+			}
+		}
+	}
+
+	for (int i = 1; i < NodeSize; ++i)
+	{
+		int Cost = vecDist[s][i] + vecDist[i][a] + vecDist[i][b];
+		answer = min(answer, Cost);
+	}
+
+	return answer;
+}
 
 
 //2021 KAKAO BLIND RECRUITMENT 광고 삽입
@@ -10,19 +55,6 @@ int TimeToSecond(string str)
 		+ ((str[3] - '0') * 10 + str[4] - '0') * 60
 		+ (str[6] - '0') * 10 + str[7] - '0';
 	return Second;
-}
-
-string SecondToTime(long long Second)
-{
-
-	string hour = to_string(Second / 3600 / 10);
-	hour += to_string(Second / 3600 % 10);
-	string minete = to_string(Second % 3600 / 60 / 10);
-	minete += to_string(Second % 3600 / 60 % 10);
-	string second = to_string(Second % 60 / 10);
-	second += to_string(Second % 60 % 10);
-
-	return hour + ":" + minete + ":" + second;
 }
 
 int arrViewer[360001];
@@ -60,10 +92,17 @@ string videoADInsert(string play_time, string adv_time, vector<string> logs) {
 			Max = AccTime;
 			Idx = i < AdTime ? 0 : i - AdTime;
 		}
-
 	}
 
+	string answer = "";
+	answer += to_string(Idx / 3600 / 10);
+	answer += to_string(Idx / 3600 % 10);
+	answer += ":";
+	answer += to_string(Idx % 3600 / 60 / 10);
+	answer += to_string(Idx % 3600 / 60 % 10);
+	answer += ":";
+	answer += to_string(Idx % 60 / 10);
+	answer += to_string(Idx % 60 % 10);
 
-
-	return SecondToTime(Idx);
+	return answer;
 }
