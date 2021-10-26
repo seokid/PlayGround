@@ -33,6 +33,6 @@ void test()
 
 void test2()
 {
-	vector<string> vec = { "01:20:15-01:45:14", "01:37:44-02:02:30", "01:30:59-01:53:29"};
-	CProgrammers::videoADInsert("02:03:55", "00:14:15", vec);
+	vector<vector<int>> vec = { {1, 0, 0, 3},{2, 0, 0, 0},{0, 0, 0, 2},{3, 0, 1, 0} };
+	cout << CProgrammers::cardMatch(vec, 1, 0) << endl;
 }
