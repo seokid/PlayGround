@@ -13,5 +13,7 @@
 #include <bitset>
 #include <list>
 #include <thread>
+#include <numeric>
+
 
 using namespace std;

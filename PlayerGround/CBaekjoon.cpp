@@ -132,7 +132,113 @@ void CBaekjoon::Palindrome()
 
 	for (size_t i = 0; i < vec.size(); ++i)
 	{
-		cout << IsPalindrome(0, vec[i].size() - 1, vec[i], 0) << endl;
+		cout << IsPalindrome(0, (int)vec[i].size() - 1, vec[i], 0) << endl;
 	}
 
+}
+
+//17610번
+//양팔저울
+//여러 개의 추를 이용하여 측정할 수 없는 무게의 개수를 출력하라
+
+void DFSBalance(vector<int>& g, vector<int>& result, int Sum, int start)
+{
+	if (0 < Sum)
+	{
+		result[Sum] = 1;
+	}
+	
+	for (size_t i = start + 1; i < g.size(); ++i)
+	{
+		DFSBalance(g, result, Sum + g[i], (int)i);
+		DFSBalance(g, result, Sum - g[i], (int)i);
+	}
+}
+
+void CBaekjoon::EqualArmBalance()
+{
+	int n;
+	cin >> n;
+
+	vector<int> g(n);
+
+	for (int i = 0; i < n; ++i)
+	{
+		cin >> g[i];
+	}
+
+	const int max = accumulate(g.begin(), g.end(), 0);
+
+	vector<int> result(max + 1);
+
+	DFSBalance(g, result, 0, -1);
+
+	const int cnt = accumulate(result.begin(), result.end(), 0);	//체크된 총 개수
+
+	cout << max - cnt << endl;
+}
+
+
+//17611번
+//직각다각형
+//직각다각형에서 가장 많이 교차하는 수직, 수평선분 중 가장 큰 값을 출력하라
+void CBaekjoon::RightAnglePolygon()
+{
+	int n, x, y;
+	cin >> n;
+
+	vector<pair<int,int>> pos(n);
+
+	for (int i = 0; i < n; ++i)
+	{
+		cin >> x >> y;
+		pos[i] = make_pair(x, y);
+	}
+
+	pos.push_back(pos[0]);
+
+	map<int, int> graphX;
+	map<int, int> graphY;
+
+	for (size_t i = 0; i < pos.size() - 1; ++i)
+	{
+		if (pos[i].first < pos[i + 1].first)
+		{
+			graphX[pos[i].first]++;
+			graphX[pos[i + 1].first]--;
+		}
+		else if (pos[i].first > pos[i + 1].first)
+		{
+			graphX[pos[i + 1].first]++;
+			graphX[pos[i].first]--;
+		}
+
+		if (pos[i].second < pos[i + 1].second)
+		{
+			graphY[pos[i].second]++;
+			graphY[pos[i + 1].second]--;
+		}
+		else if (pos[i].second > pos[i + 1].second)
+		{
+			graphY[pos[i + 1].second]++;
+			graphY[pos[i].second]--;
+		}
+	}
+
+	int Max = INT32_MIN;
+	int sum = 0;
+	for (auto& pair : graphX)
+	{
+		sum += pair.second;
+		Max = max(Max, sum);
+	}
+
+	sum = 0;
+	for (auto& pair : graphY)
+	{
+		sum += pair.second;
+		Max = max(Max, sum);
+	}
+	
+	cout << Max << endl;
 }

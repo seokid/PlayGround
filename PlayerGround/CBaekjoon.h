@@ -6,5 +6,7 @@ public:
 	static void N_Queen();
 	static void Bar();
 	static void Palindrome();
+	static void EqualArmBalance();
+	static void RightAnglePolygon();
 };
 

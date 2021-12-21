@@ -8,7 +8,7 @@ int answer;
 //두 사람이 모두 귀가하는 데 소요되는 예상 최저 택시요금 반환, 합승 가능
 //Floyd Warshall 알고리즘을 사용하여 모든 노드의 최단거리를 구하여 최소요금 계산
 int CProgrammers::carPool(int n, int s, int a, int b, vector<vector<int>> fares) {
-	answer = INF;
+	answer = (int)INF;
 	int NodeSize = n + 1;
 
 	vector<vector<int>> vecDist(NodeSize);

@@ -77,7 +77,7 @@ void CHackerRank::whatFlavors(vector<int> cost, int money)
 	for (size_t i = 0; i < cost.size(); ++i)
 	{
 		if (money > cost[i])
-			map[cost[i]] = i;
+			map[cost[i]] = (int)i;
 	}
 
 	for (size_t i = 0; i < cost.size(); ++i)

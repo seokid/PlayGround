@@ -82,7 +82,7 @@ void ElementToBinary(EElementSkill Skill)
 
 void test()
 {
-	CBaekjoon::Palindrome();
+	CBaekjoon::RightAnglePolygon();
 }
 
 
