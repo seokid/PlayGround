@@ -242,3 +242,80 @@ void CBaekjoon::RightAnglePolygon()
 	
 	cout << Max << endl;
 }
+
+
+//17612번
+//쇼핑몰
+//손님이 계산대에서 빠져나가는 순서대로 1 * id1 + 2 * id2 ... N * idN의 합을 출력하라
+
+struct tCustomer
+{
+	int id, work, counter;
+
+	bool operator()(tCustomer Left, tCustomer Right)
+	{
+		if (Left.work == Right.work)
+		{
+			return Left.counter > Right.counter;
+		}
+
+		return Left.work > Right.work;
+	}
+};
+
+bool ShoppingMall_compair(tCustomer Left, tCustomer Right)
+{
+	if (Left.work == Right.work)
+	{
+		return Left.counter > Right.counter;
+	}
+
+	return Left.work < Right.work;
+}
+
+void CBaekjoon::ShoppingMall()
+{
+	int n, k, id, w;
+	long long answer = 0;
+	cin >> n >> k;
+
+	vector<tCustomer> ready;
+	priority_queue<tCustomer, vector<tCustomer>, tCustomer> execute;
+	vector<tCustomer> finish;
+
+
+	for (int i = 0; i < n; ++i)
+	{
+		cin >> id >> w;
+		ready.push_back({id, w, i});
+	}
+
+	int Idx = 0;
+
+	for (; Idx < k && Idx < n; ++Idx)
+	{
+		execute.push(ready[Idx]);
+	}
+
+	while (n > finish.size())
+	{
+		tCustomer cust = execute.top(); execute.pop();
+		finish.push_back(cust);
+		if (n > Idx)
+		{
+			cust.id = ready[Idx].id;
+			cust.work += ready[Idx++].work;
+			execute.push(cust);
+		}
+	}
+
+	sort(finish.begin(), finish.end(), ShoppingMall_compair);
+
+	for (size_t i = 0; i < finish.size(); ++i)
+	{
+		answer += finish[i].id * (i + 1);
+	}
+	
+	cout << answer << endl;
+
+}

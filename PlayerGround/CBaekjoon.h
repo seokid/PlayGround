@@ -8,5 +8,6 @@ public:
 	static void Palindrome();
 	static void EqualArmBalance();
 	static void RightAnglePolygon();
+	static void ShoppingMall();
 };
 

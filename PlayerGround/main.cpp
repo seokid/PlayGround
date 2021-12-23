@@ -80,9 +80,17 @@ void ElementToBinary(EElementSkill Skill)
 }
 
 
+struct AA
+{
+	int b;
+};
+
 void test()
 {
-	CBaekjoon::RightAnglePolygon();
+	CBaekjoon::ShoppingMall();
+
+
+
 }
 
 
