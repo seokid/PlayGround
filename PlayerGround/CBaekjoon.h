@@ -9,5 +9,6 @@ public:
 	static void EqualArmBalance();
 	static void RightAnglePolygon();
 	static void ShoppingMall();
+	static void Jump();
 };
 

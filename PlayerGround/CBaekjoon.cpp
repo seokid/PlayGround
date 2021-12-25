@@ -34,6 +34,8 @@ void N_Queen_DFS(int y, int n)
 
 void CBaekjoon::N_Queen()
 {
+	ios::sync_with_stdio(0); cin.tie(0);
+
 	int n;
 
 	cin >> n;
@@ -43,21 +45,12 @@ void CBaekjoon::N_Queen()
 	cout << N_Queen_Check_answer << endl;
 }
 
-
-bool cmp(pair<int, int> Left, pair<int, int> Right)
-{
-	if (Left.first == Right.first)
-	{
-		return Left.second > Right.second;
-	}
-	return Left.first > Right.first;
-}
-
 //17608번
 //막대기
 //막대기를 일렬로 세워 오른쪽에서 봤을때 보이는 막대기의 개수를 출력하라
 void CBaekjoon::Bar()
 {
+	ios::sync_with_stdio(0); cin.tie(0);
 
 	int n, h, answer = 0;
 	cin >> n;
@@ -102,6 +95,8 @@ void CBaekjoon::Bar()
 
 int IsPalindrome(int head, int tail, const string& str, int depth)
 {
+	ios::sync_with_stdio(0); cin.tie(0);
+
 	if (1 < depth)
 		return 2;
 
@@ -119,6 +114,8 @@ int IsPalindrome(int head, int tail, const string& str, int depth)
 
 void CBaekjoon::Palindrome()
 {
+	ios::sync_with_stdio(0); cin.tie(0);
+
 	int n;
 	
 	cin >> n;
@@ -157,6 +154,8 @@ void DFSBalance(vector<int>& g, vector<int>& result, int Sum, int start)
 
 void CBaekjoon::EqualArmBalance()
 {
+	ios::sync_with_stdio(0); cin.tie(0);
+
 	int n;
 	cin >> n;
 
@@ -184,6 +183,8 @@ void CBaekjoon::EqualArmBalance()
 //직각다각형에서 가장 많이 교차하는 수직, 수평선분 중 가장 큰 값을 출력하라
 void CBaekjoon::RightAnglePolygon()
 {
+	ios::sync_with_stdio(0); cin.tie(0);
+
 	int n, x, y;
 	cin >> n;
 
@@ -275,6 +276,8 @@ bool ShoppingMall_compair(tCustomer Left, tCustomer Right)
 
 void CBaekjoon::ShoppingMall()
 {
+	ios::sync_with_stdio(0); cin.tie(0);
+
 	int n, k, id, w;
 	long long answer = 0;
 	cin >> n >> k;
@@ -318,4 +321,48 @@ void CBaekjoon::ShoppingMall()
 	
 	cout << answer << endl;
 
+}
+
+
+//17613번
+//점프
+//0부터 시작, 점프 거리는 1부터 2배로 증가하여 점프하며 1로 초기화 가능
+//도착지의 값이 x ~ y범위내에서 가장 많이 점프한 경우의 값을 출력하라
+map<pair<int,int>,int> JumpCount;
+
+int DPJump(int start, int end)
+{
+	if (JumpCount.count({start, end}))
+		return JumpCount[{start, end}];
+
+	int Max = INT32_MIN;
+	for (int i = 1; end + 1 >> i; ++i)
+	{
+		int st = max(start, (1 << i) - 1);
+		int ed = min(end, (1 << (i + 1)) - 2);
+		int move = (1 << i) - 1;
+		st -= move;
+		ed -= move;
+		if (st <= ed)
+			Max = max(Max, DPJump(st, ed) + i);
+	}
+
+	return JumpCount[{start, end}] = Max;
+}
+
+void CBaekjoon::Jump()
+{
+	ios::sync_with_stdio(0); cin.tie(0);
+
+	JumpCount[{0,0}] = 0;
+
+	int n, x, y;
+
+	cin >> n;
+
+	for (int i = 0; i < n; ++i)
+	{
+		cin >> x >> y;
+		cout << DPJump(x, y) << "\n";
+	}
 }

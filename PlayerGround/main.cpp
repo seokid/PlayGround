@@ -79,17 +79,9 @@ void ElementToBinary(EElementSkill Skill)
 	cout << (int32_t)Skill << endl;
 }
 
-
-struct AA
-{
-	int b;
-};
-
 void test()
 {
-	CBaekjoon::ShoppingMall();
-
-
+	
 
 }
 
