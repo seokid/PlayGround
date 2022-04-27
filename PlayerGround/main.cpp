@@ -330,6 +330,7 @@ int solution3(int bridge_length, int weight, vector<int> vec) {
 			curWeight += vec[i];
 			bridge.push({ vec[i], Time });
 
+
 		}
 		else
 		{
