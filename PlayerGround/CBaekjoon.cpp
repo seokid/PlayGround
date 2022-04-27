@@ -366,3 +366,29 @@ void CBaekjoon::Jump()
 		cout << DPJump(x, y) << "\n";
 	}
 }
+
+
+//17614번
+//369
+//N까지의 게임이 진행되었을때 총 박수의 횟수를 출력
+void CBaekjoon::Game369()
+{
+	ios::sync_with_stdio(0); cin.tie(0);
+
+	int n;
+	
+	cin >> n;
+
+	long long answer = 0;
+
+
+	answer += n % 10 / 3;
+	answer += n / 10 * 3;
+
+
+	answer += n % 10 / 3 - n % 10 % 3 ? 0 : 1 * 10;
+	answer += n % 100 % 30 * 10;
+
+}
+
+

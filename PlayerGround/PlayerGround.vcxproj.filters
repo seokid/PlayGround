@@ -16,6 +16,12 @@
     <Filter Include="CodingTest">
       <UniqueIdentifier>{2c0c695c-78f0-4e09-8342-6f90b9e12579}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{fd29ff17-3d19-4ca7-9017-be6348d2208b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{c3d0ce36-9346-488e-ab17-58cc4e7e2552}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,6 +35,18 @@
     </ClCompile>
     <ClCompile Include="CBaekjoon.cpp">
       <Filter>CodingTest</Filter>
+    </ClCompile>
+    <ClCompile Include="CFileAlter.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="CStringHelper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="CAlgorithmHelper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="CMathHelper.cpp">
+      <Filter>Helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +64,18 @@
     </ClInclude>
     <ClInclude Include="CBaekjoon.h">
       <Filter>CodingTest</Filter>
+    </ClInclude>
+    <ClInclude Include="CFileAlter.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="CStringHelper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="CAlgorithmHelper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="CMathHelper.h">
+      <Filter>Helper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

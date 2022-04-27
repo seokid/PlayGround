@@ -246,3 +246,148 @@ int CProgrammers::cardMatch(vector<vector<int>> board, int r, int c) {
 
 	return answer;
 }
+
+
+
+
+//2019 KAKAO BLIND RECRUITMENT ¸ÅÄªÁ¡¼ö
+//¹®ÀÚ¿­ ÆÄ½Ì
+
+void matchPoint_Parsing(const string & page, const string & startWord, const string & endWord, vector<string>& result)
+{
+	size_t startIdx = page.find(startWord);
+	size_t endIdx;
+
+	while (string::npos != startIdx)
+	{
+		startIdx += startWord.size();
+		endIdx = page.find(endWord, startIdx) - startIdx;
+		result.push_back(page.substr(startIdx, endIdx));
+		startIdx = page.find(startWord, startIdx + endIdx);
+	}
+}
+
+void matchPoint_Split(const string& str, vector<string>& result)
+{
+	string tmp = "";
+
+	for (size_t i = 0; i < str.size(); ++i)
+	{
+		if (!('a' <= str[i] && 'z' >= str[i]))
+		{
+			if (!tmp.empty())
+			{
+				result.push_back(tmp);
+				tmp = "";
+			}
+				
+			continue;
+		}
+		tmp += str[i];
+	}
+
+	if (!tmp.empty())
+		result.push_back(tmp);
+}
+
+
+int CProgrammers::matchPoint(string word, vector<string> pages)
+{
+	int answer = 0;
+
+	transform(word.begin(), word.end(), word.begin(), ::tolower);
+
+	unordered_map<string, int> map;
+	vector<vector<string>> links;
+	vector<double> basicScore;
+
+	for (size_t i = 0; i < pages.size(); ++i)
+	{
+		transform(pages[i].begin(), pages[i].end(), pages[i].begin(), ::tolower);
+
+		vector<string> result;
+		matchPoint_Parsing(pages[i], "<meta property=\"og:url\" content=\"https://", "\"/>", result);
+
+		map.insert({ result[0], i });
+
+		matchPoint_Parsing(pages[i], "<body>", "</body>", result);
+
+		string body = result[1];
+
+		result.clear();
+		matchPoint_Split(body, result);
+
+		int basicPoint = 0;
+
+		for (size_t j = 0; j < result.size(); ++j)
+		{
+			if (word == result[j])
+				++basicPoint;
+		}
+
+		basicScore.push_back((double)basicPoint);
+
+		result.clear();
+		matchPoint_Parsing(body, "<a href=\"https://", "\">", result);
+
+		links.push_back(result);
+	}
+
+	vector<double> linkScore(basicScore);
+	for (size_t i = 0; i < links.size(); ++i)
+	{
+		for (const auto& link : links[i])
+		{
+			auto iter = map.find(link);
+			if (iter != map.end())
+			{
+				linkScore[iter->second] += basicScore[i] / (double)links[i].size();
+			}
+		}
+	}
+
+	double maxScore = 0.f;
+	for (size_t i = 0; i < linkScore.size(); ++i)
+	{
+		if (maxScore < linkScore[i])
+		{
+			answer = i;
+			maxScore = linkScore[i];
+		}
+	}
+
+	return answer;
+
+}
+
+
+void brian_split(string& str, vector<string>& result)
+{
+	string tmp = "";
+
+	for (size_t i = 0; i < str.size(); ++i)
+	{
+		if (' ' == str[i])
+			continue;
+
+
+
+		tmp += str[i];
+	}
+
+	if (!tmp.empty())
+		result.push_back(tmp);
+}
+
+string CProgrammers::brianConsider(string str)
+{
+	vector<string> result;
+
+	brian_split(str, result);
+
+	for (string st : result)
+	{
+		cout << st << endl;
+	}
+	return "";
+}

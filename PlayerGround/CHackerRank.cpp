@@ -184,3 +184,61 @@ vector<vector<int>> CHackerRank::swapNodes(vector<vector<int>> indexes, vector<i
 
 	return Answer;
 }
+
+
+//Maximum Subarray Sum
+//부분합을 이용하여 가장 큰 나머지 값을 반환하라
+
+long CHackerRank::maximumSum(vector<long> a, long m)
+{
+	long answer = 0l;
+	long Sum = 0l;
+
+	set<long> st;
+	for (size_t i = 0; i < a.size(); ++i)
+	{
+		Sum = (Sum + a[i]) % m;	//누적
+		answer = max(answer, Sum);
+		set<long>::iterator iter = st.lower_bound(Sum + 1);	//lower_bound가 같거나 큰 값이기 때문에 무조건 큰값만 찾아야해서 + 1
+															//지금까지 누적된 결과 중 자신보다 큰 값을 찾는다.(이 값을 시작으로 자기 기준 최대 부분 누적합)
+		if (st.end() != iter)
+		{
+			answer = max(answer, (Sum - *iter + m) % m);	//(누적합 - 시작합 + m(음수로 넘어갈수있기때문에 더해준다 어처피 나머지를 사용하기때문에 지장없음)) % m
+		}
+		st.insert(Sum);
+	}
+
+	return answer;
+	
+}
+
+
+//Max Array Sum
+//누적합을 이용하여 최대 값 찾기
+//음수일 경우 0을 리턴
+int CHackerRank::maxSubsetSum(vector<int> arr)
+{
+	// 초기 셋팅을 0으로 해서 최대 값을 0으로 리턴
+	arr[0] = max(arr[0], 0);
+	arr[1] = max(arr[1], 0);
+
+	if (2 < arr.size())
+	{
+		if (0 < arr[2])
+			arr[2] += arr[0];
+		else
+			arr[2] = arr[0];
+	}
+
+	for (size_t i = 3; i < arr.size(); ++i)
+	{
+		//자신이 음수라면 이전 누적합을 그대로 사용한다(자신을 건너뜀)
+		int Max = max(arr[i - 2], arr[i - 3]);
+		if (0 < arr[i])
+			arr[i] += Max;
+		else
+			arr[i] = Max;
+	}
+
+	return *max_element(arr.begin(), arr.end());
+}

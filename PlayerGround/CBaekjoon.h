@@ -10,5 +10,6 @@ public:
 	static void RightAnglePolygon();
 	static void ShoppingMall();
 	static void Jump();
+	static void Game369();
 };
 

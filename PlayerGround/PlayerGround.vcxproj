@@ -151,15 +151,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CAlgorithmHelper.cpp" />
     <ClCompile Include="CBaekjoon.cpp" />
+    <ClCompile Include="CFileAlter.cpp" />
     <ClCompile Include="CHackerRank.cpp" />
+    <ClCompile Include="CMathHelper.cpp" />
     <ClCompile Include="CProgrammers.cpp" />
+    <ClCompile Include="CStringHelper.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CAlgorithmHelper.h" />
     <ClInclude Include="CBaekjoon.h" />
+    <ClInclude Include="CFileAlter.h" />
     <ClInclude Include="CHackerRank.h" />
+    <ClInclude Include="CMathHelper.h" />
     <ClInclude Include="CProgrammers.h" />
+    <ClInclude Include="CStringHelper.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="global.h" />
   </ItemGroup>
